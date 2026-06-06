@@ -1,154 +1,116 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { FaTrash, FaEdit } from "react-icons/fa";
-
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import { listTransactionsAPI } from "../../services/transactions/transactionService";
+import { useNavigate } from "react-router-dom";
+import { listTransactionsAPI, deleteTransactionAPI } from "../../services/transactions/transactionService";
 import { listCategoriesAPI } from "../../services/category/categoryService";
 
 const TransactionList = () => {
-  //!Filtering state
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const [filters, setFilters] = useState({
-    startDate: "",
-    endDate: "",
-    type: "",
-    category: "",
+    startDate: "", endDate: "", type: "", category: "",
   });
-  //!Handle Filter Change
+
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
-  //fetching
-  const {
-    data: categoriesData,
-    isLoading: categoryLoading,
-    error: categoryErr,
-  } = useQuery({
+  const { data: categoriesData } = useQuery({
     queryFn: listCategoriesAPI,
     queryKey: ["list-categories"],
   });
-  //fetching
-  const {
-    data: transactions,
-    isError,
-    isLoading,
-    isFetched,
-    error,
-    refetch,
-  } = useQuery({
+
+  const { data: transactions, isLoading } = useQuery({
     queryFn: () => listTransactionsAPI(filters),
     queryKey: ["list-transactions", filters],
   });
 
+  const { mutateAsync: deleteTrans, isPending: isDeleting } = useMutation({
+    mutationFn: deleteTransactionAPI,
+    mutationKey: ["delete-transaction"],
+    onSuccess: () => queryClient.invalidateQueries(["list-transactions"]),
+  });
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Delete this transaction?")) await deleteTrans(id);
+  };
+
+  const inputClass = "w-full p-2.5 rounded-xl glass-dark border border-white/5 text-[#f5f0e8] text-sm focus:border-[#e8dcc8] focus:outline-none appearance-none";
+
   return (
-    <div className="my-4 p-4 shadow-lg rounded-lg bg-white">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {/* Start Date */}
-        <input
-          type="date"
-          name="startDate"
-          value={filters.startDate}
-          onChange={handleFilterChange}
-          className="p-2 rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-        />
-        {/* End Date */}
-        <input
-          value={filters.endDate}
-          onChange={handleFilterChange}
-          type="date"
-          name="endDate"
-          className="p-2 rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-        />
-        {/* Type */}
+    <div className="glass rounded-2xl p-6 border border-white/5">
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="text-lg font-semibold text-[#f5f0e8]">Transactions</h2>
+        <span className="text-[#a89f91] text-sm">{transactions?.length || 0} records</span>
+      </div>
+
+      {/* Filters */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+        <input type="date" name="startDate" value={filters.startDate} onChange={handleFilterChange} className={inputClass} />
+        <input type="date" name="endDate" value={filters.endDate} onChange={handleFilterChange} className={inputClass} />
         <div className="relative">
-          <select
-            name="type"
-            value={filters.type}
-            onChange={handleFilterChange}
-            className="w-full p-2 rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 appearance-none"
-          >
+          <select name="type" value={filters.type} onChange={handleFilterChange} className={inputClass}>
             <option value="">All Types</option>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>
-          <ChevronDownIcon className="w-5 h-5 absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500" />
+          <ChevronDownIcon className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-[#a89f91] pointer-events-none" />
         </div>
-        {/* Category */}
         <div className="relative">
-          <select
-            value={filters.category}
-            onChange={handleFilterChange}
-            name="category"
-            className="w-full p-2 rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 appearance-none"
-          >
+          <select name="category" value={filters.category} onChange={handleFilterChange} className={inputClass}>
             <option value="All">All Categories</option>
             <option value="Uncategorized">Uncategorized</option>
-            {categoriesData?.map((category) => {
-              return (
-                <option key={category?._id} value={category?.name}>
-                  {category?.name}
-                </option>
-              );
-            })}
-          </select>
-          <ChevronDownIcon className="w-5 h-5 absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500" />
-        </div>
-      </div>
-      <div className="my-4 p-4 shadow-lg rounded-lg bg-white">
-        {/* Inputs and selects for filtering (unchanged) */}
-        <div className="mt-6 bg-gray-50 p-4 rounded-lg shadow-inner">
-          <h3 className="text-xl font-semibold mb-4 text-gray-800">
-            Filtered Transactions
-          </h3>
-          <ul className="list-disc pl-5 space-y-2">
-            {transactions?.map((transaction) => (
-              <li
-                key={transaction._id}
-                className="bg-white p-3 rounded-md shadow border border-gray-200 flex justify-between items-center"
-              >
-                <div>
-                  <span className="font-medium text-gray-600">
-                    {new Date(transaction.date).toLocaleDateString()}
-                  </span>
-                  <span
-                    className={`ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      transaction.type === "income"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
-                  >
-                    {transaction.type.charAt(0).toUpperCase() +
-                      transaction.type.slice(1)}
-                  </span>
-                  <span className="ml-2 text-gray-800">
-                    {transaction.category?.name} - $
-                    {transaction.amount.toLocaleString()}
-                  </span>
-                  <span className="text-sm text-gray-600 italic ml-2">
-                    {transaction.description}
-                  </span>
-                </div>
-                <div className="flex space-x-3">
-                  <button
-                    onClick={() => handleUpdateTransaction(transaction._id)}
-                    className="text-cyan-500 hover:text-cyan-700"
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(transaction._id)}
-                    className="text-pink-400 hover:text-pink-500"
-                  >
-                    <FaTrash />
-                  </button>
-                </div>
-              </li>
+            {categoriesData?.map((cat) => (
+              <option key={cat._id} value={cat.name}>{cat.name}</option>
             ))}
-          </ul>
+          </select>
+          <ChevronDownIcon className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-[#a89f91] pointer-events-none" />
         </div>
       </div>
+
+      {/* List */}
+      {isLoading ? (
+        <p className="text-center text-[#a89f91] py-8">Loading...</p>
+      ) : transactions?.length === 0 ? (
+        <p className="text-center text-[#a89f91] py-8">No transactions found.</p>
+      ) : (
+        <ul className="space-y-2 max-h-[420px] overflow-y-auto pr-1">
+          {transactions?.map((t) => (
+            <li key={t._id} className="glass-dark rounded-xl p-4 flex justify-between items-center border border-white/5 hover:border-[#e8dcc8]/30 transition duration-150">
+              <div className="flex items-center gap-3">
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold ${t.type === "income" ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"}`}>
+                  {t.type === "income" ? "+" : "-"}
+                </div>
+                <div>
+                  <p className="text-[#f5f0e8] text-sm font-medium">
+                    {t.category?.name || t.category || "Uncategorized"}
+                  </p>
+                  <p className="text-[#a89f91] text-xs mt-0.5">
+                    {t.description || "—"} • {new Date(t.date).toLocaleDateString()}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className={`font-semibold text-sm ${t.type === "income" ? "text-green-400" : "text-red-400"}`}>
+                  {t.type === "income" ? "+" : "-"}${t.amount.toLocaleString()}
+                </span>
+                <div className="flex gap-2">
+                  <button onClick={() => navigate(`/update-transaction/${t._id}`)} className="text-[#a89f91] hover:text-[#e8dcc8] transition">
+                    <FaEdit className="text-xs" />
+                  </button>
+                  <button onClick={() => handleDelete(t._id)} disabled={isDeleting} className="text-[#a89f91] hover:text-red-400 transition">
+                    <FaTrash className="text-xs" />
+                  </button>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

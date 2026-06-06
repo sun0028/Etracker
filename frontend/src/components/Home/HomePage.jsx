@@ -1,128 +1,77 @@
 import React from "react";
-import {
-  FaMoneyBillWave,
-  FaRegCalendarAlt,
-  FaSignInAlt,
-  FaList,
-  FaChartPie,
-  FaQuoteLeft,
-} from "react-icons/fa";
-import { IoIosStats } from "react-icons/io";
-import { FaFilter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-const HeroSection = () => {
+import { FaMoneyBillWave, FaFilter, FaChartPie, FaShieldAlt, FaTags, FaRegCalendarAlt } from "react-icons/fa";
+
+const HomePage = () => {
   return (
-    <>
-      <div className="bg-gradient-to-r from-pink-500 to-cyan-400 text-white py-20 px-4">
-        <div className="max-w-7xl mx-auto flex flex-col items-center">
-          {/* Heading */}
-          <h1 className="text-5xl font-bold text-center">
-            Track Your Expenses Effortlessly
-          </h1>
-
-          {/* Subheading */}
-          <p className="mt-4 text-xl text-center">
-            Manage your finances with a modern solution designed for you.
-          </p>
-
-          {/* Feature Icons */}
-          <div className="flex space-x-8 mt-10">
-            <div className="flex flex-col items-center">
-              <FaMoneyBillWave className="text-3xl" />
-              <p className="mt-2">Efficient Tracking</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <FaFilter className="text-3xl" />
-              <p className="mt-2">Transactions Filtering</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <IoIosStats className="text-3xl" />
-              <p className="mt-2">Insightful Reports</p>
-            </div>
-          </div>
-
-          {/* Call to Action Button */}
-          <Link to="/register">
-            <button className="mt-8 px-6 py-3 bg-white text-cyan-600 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
-              Get Started
-            </button>
-          </Link>
-        </div>
-      </div>
-      {/* How it works */}
-      <div className="py-20 px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-800">
-          How It Works
-        </h2>
-        <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Step 1 */}
-          <div className="flex flex-col items-center text-center">
-            <div className="p-4 rounded-full bg-cyan-500 text-white mb-4">
-              <FaSignInAlt className="text-xl" />
-            </div>
-            <h3 className="mb-2 font-semibold">Sign Up</h3>
-            <p>Register and start managing your expenses in a minute.</p>
-          </div>
-          {/* Step 2 */}
-          <div className="flex flex-col items-center text-center">
-            <div className="p-4 rounded-full bg-teal-400 text-white mb-4">
-              <FaList className="text-xl" />
-            </div>
-            <h3 className="mb-2 font-semibold">Add Transactions</h3>
-            <p>Quickly add income and expenses to your account.</p>
-          </div>
-          {/* Step 3 */}
-          <div className="flex flex-col items-center text-center">
-            <div className="p-4 rounded-full bg-violet-400 text-white mb-4">
-              <FaChartPie className="text-xl" />
-            </div>
-            <h3 className="mb-2 font-semibold">View Reports</h3>
-            <p>See insightful reports & graphs of your finances.</p>
-          </div>
-        </div>
-      </div>
-      {/* Testimonials */}
-      <div className="bg-gray-100 py-20 px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-800">
-          What Our Users Say
-        </h2>
-        <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <FaQuoteLeft className="text-xl text-gray-400" />
-            <p className="mt-4">
-              "This app has revolutionized the way I track my expenses. Highly
-              intuitive and user-friendly."
-            </p>
-            <p className="mt-4 font-bold">- Prajakta</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <FaQuoteLeft className="text-xl text-gray-400" />
-            <p className="mt-4">
-              "Finally, a hassle-free way to manage my finances. The insights
-              feature is a game changer!"
-            </p>
-            <p className="mt-4 font-bold">- Casey </p>
-          </div>
-        </div>
-      </div>
-      {/* CTA */}
-      <div className="bg-cyan-500 text-white py-20 px-4">
+    <div className="glass-dark text-[#f5f0e8]">
+      {/* Hero */}
+      <section className="py-24 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold">
-            Ready to Take Control of Your Finances?
-          </h2>
-          <p className="mt-4">
-            Join us now and start managing your expenses like a pro!
+          <span className="inline-block bg-[#e8dcc8]/20 text-[#e8dcc8] text-xs font-semibold px-3 py-1 rounded-full mb-4 tracking-widest uppercase">
+            Personal Finance
+          </span>
+          <h1 className="text-5xl font-bold leading-tight mb-6 text-[#f5f0e8]">
+            Take Control of Your <span className="text-[#e8dcc8]">Finances</span>
+          </h1>
+          <p className="text-lg text-[#a89f91] max-w-2xl mx-auto mb-10">
+            Track income and expenses, manage custom categories, and visualise your spending — all in one place.
           </p>
-          <Link to="/register">
-            <button className="mt-8 px-6 py-3 bg-white text-cyan-500 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
-              Sign Up For Free
-            </button>
-          </Link>
+          <div className="flex justify-center gap-4 flex-wrap">
+            <Link to="/register" className="px-8 py-3 bg-[#e8dcc8] hover:bg-[#d4a55a] text-[#0f1b2d] font-semibold rounded-xl transition duration-200">
+              Get Started !
+            </Link>
+           
+          </div>
         </div>
-      </div>
-    </>
+      </section>
+
+      {/* Features */}
+      <section className="py-20 px-6 bg-[#0a1220]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-[#f5f0e8] mb-2">Everything You Need</h2>
+          <p className="text-center text-[#a89f91] mb-12">Built for people who want clarity over their money.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { icon: <FaMoneyBillWave className="text-2xl text-[#e8dcc8]" />, title: "Income & Expense Tracking", desc: "Log every transaction with amount, date, category, and description in seconds." },
+              { icon: <FaTags className="text-2xl text-[#e8dcc8]" />, title: "Custom Categories", desc: "Create your own income and expense categories. Rename or delete them anytime." },
+              { icon: <FaFilter className="text-2xl text-[#e8dcc8]" />, title: "Smart Filtering", desc: "Filter transactions by date range, type, or category to find exactly what you need." },
+              { icon: <FaChartPie className="text-2xl text-[#e8dcc8]" />, title: "Visual Reports", desc: "See your income vs expense breakdown in a clear doughnut chart on your dashboard." },
+              { icon: <FaShieldAlt className="text-2xl text-[#e8dcc8]" />, title: "Secure & Private", desc: "Your data is protected with JWT authentication. Only you can see your transactions." },
+              { icon: <FaRegCalendarAlt className="text-2xl text-[#e8dcc8]" />, title: "Date-Based Insights", desc: "View your financial history over any time period with date range filters." },
+            ].map((f, i) => (
+              <div key={i} className="glass p-6 rounded-2xl border border-white/5 hover:border-[#e8dcc8]/30 transition duration-200">
+                <div className="mb-3">{f.icon}</div>
+                <h3 className="font-semibold text-[#f5f0e8] mb-2">{f.title}</h3>
+                <p className="text-sm text-[#a89f91] leading-relaxed">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-[#f5f0e8] mb-12">How It Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            {[
+              { step: "01", title: "Create an Account", desc: "Sign up in under a minute. No credit card required." },
+              { step: "02", title: "Add Your Transactions", desc: "Log income and expenses with custom categories and dates." },
+              { step: "03", title: "Track & Analyse", desc: "Use the dashboard chart and filters to understand your finances." },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col items-center">
+                <span className="text-5xl font-bold text-[#e8dcc8]/20 mb-2">{item.step}</span>
+                <h3 className="font-semibold text-[#f5f0e8] mb-2">{item.title}</h3>
+                <p className="text-sm text-[#a89f91]">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+    </div>
   );
 };
 
-export default HeroSection;
+export default HomePage;

@@ -4,21 +4,21 @@ const Transaction = require("../model/Transaction");
 
 const transactionController = {
   //!add
-  create: asyncHandler(async (req, res) => {
-    const { type, category, amount, date, description } = req.body;
-    if (!amount || !type || !date) {
-      throw new Error("Type, amount and date are required");
-    }
-    //! Create
-    const transaction = await Transaction.create({
-      user: req.user,
-      type,
-      category,
-      amount,
-      description,
-    });
-    res.status(201).json(transaction);
-  }),
+  create: asyncHandler(async (req, res) =>  {
+  const { type, category, amount, date, description } = req.body;
+  if (!amount || !type || !date) {
+    throw new Error("Type, amount and date are required");
+  }
+  const transaction = await Transaction.create({
+    user: req.user,
+    type,
+    category,
+    amount,
+    date,          // ← was missing
+    description,
+  });
+  res.status(201).json(transaction);
+}),
 
   //!lists
   getFilteredTransactions: asyncHandler(async (req, res) => {

@@ -24,6 +24,7 @@
 
 // module.exports = isAuthenticated;
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const isAuthenticated = async (req, res, next) => {
   const headerObj = req.headers;
@@ -34,7 +35,7 @@ const isAuthenticated = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "tracker");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded.id;
     next();
   } catch (err) {

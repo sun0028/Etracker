@@ -1,135 +1,103 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {
-  FaDollarSign,
-  FaCalendarAlt,
-  FaRegCommentDots,
-  FaWallet,
-} from "react-icons/fa";
-import { SiDatabricks } from "react-icons/si";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { FaWallet, FaTag } from "react-icons/fa";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateCategoryAPI } from "../../services/category/categoryService";
 import AlertMessage from "../Alert/AlertMessage";
 
+const inputClass = "w-full py-3 px-4 rounded-xl glass-dark border border-white/5 text-[#f5f0e8] placeholder-[#4a5568] focus:border-[#e8dcc8] focus:outline-none text-sm";
+const labelClass = "block text-[#a89f91] text-xs mb-1.5 font-medium uppercase tracking-wider";
+
 const validationSchema = Yup.object({
-  name: Yup.string()
-    .required("Category name is required")
-    .oneOf(["income", "expense"]),
-  type: Yup.string()
-    .required("Category type is required")
-    .oneOf(["income", "expense"]),
+  name: Yup.string().required("Category name is required"),
+  type: Yup.string().required("Category type is required").oneOf(["income", "expense"]),
 });
 
 const UpdateCategory = () => {
-  //Params
   const { id } = useParams();
-  console.log(id);
-  //Navigate
   const navigate = useNavigate();
 
-  // Mutation
   const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
     mutationFn: updateCategoryAPI,
     mutationKey: ["update-category"],
   });
 
   const formik = useFormik({
-    initialValues: {
-      type: "",
-      name: "",
-    },
+    initialValues: { type: "", name: "" },
+    validationSchema,
     onSubmit: (values) => {
-      const data = {
-        ...values,
-        id,
-      };
-      mutateAsync(data)
-        .then((data) => {
-          //redirect
-          navigate("/categories");
-        })
+      mutateAsync({ ...values, id })
+        .then(() => navigate("/categories"))
         .catch((e) => console.log(e));
     },
   });
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className="max-w-lg mx-auto my-10 bg-white p-6 rounded-lg shadow-lg space-y-6"
-    >
-      <div className="text-center">
-        <h2 className="text-2xl font-semibold text-gray-800">
-          Update Category
-        </h2>
-        <p className="text-gray-600">Fill in the details below.</p>
-      </div>
-      {/* Display alert message */}
-      {isError && (
-        <AlertMessage
-          type="error"
-          message={
-            error?.response?.data?.message ||
-            "Something happened please try again later"
-          }
-        />
-      )}
-      {isSuccess && (
-        <AlertMessage
-          type="success"
-          message="Category updated successfully, redirecting..."
-        />
-      )}
-      {/* Category Type */}
-      <div className="space-y-2">
-        <label
-          htmlFor="type"
-          className="flex gap-2 items-center text-gray-700 font-medium"
-        >
-          <FaWallet className="text-blue-500" />
-          <span>Type</span>
-        </label>
-        <select
-          {...formik.getFieldProps("type")}
-          id="type"
-          className="w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-        >
-          <option value="">Select transaction type</option>
-          <option value="income">Income</option>
-          <option value="expense">Expense</option>
-        </select>
-        {formik.touched.type && formik.errors.type && (
-          <p className="text-red-500 text-xs">{formik.errors.type}</p>
-        )}
-      </div>
+    <div className="min-h-screen  px-6 py-10">
+      <div className="max-w-md mx-auto">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-[#f5f0e8]">Edit Category</h1>
+          <p className="text-[#a89f91] text-sm mt-1">Update the category name or type</p>
+        </div>
 
-      {/* Category Name */}
-      <div className="flex flex-col">
-        <label htmlFor="name" className="text-gray-700 font-medium">
-          <SiDatabricks className="inline mr-2 text-blue-500" />
-          Name
-        </label>
-        <input
-          type="text"
-          {...formik.getFieldProps("name")}
-          placeholder="Name"
-          id="name"
-          className="w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 px-3"
-        />
-        {formik.touched.name && formik.errors.name && (
-          <p className="text-red-500 text-xs italic">{formik.errors.name}</p>
-        )}
-      </div>
+        <div className="glass rounded-2xl p-6 border border-white/5">
+          {isError && <AlertMessage type="error" message={error?.response?.data?.message || "Something went wrong"} />}
+          {isSuccess && <AlertMessage type="success" message="Category updated! Redirecting..." />}
 
-      {/* Submit Button */}
-      <button
-        type="submit"
-        className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-200 transform"
-      >
-        Update Category
-      </button>
-    </form>
+          <form onSubmit={formik.handleSubmit} className="space-y-5 mt-2">
+            <div>
+              <label className={labelClass}>
+                <FaWallet className="inline mr-1.5 text-[#e8dcc8]" />
+                Type
+              </label>
+              <select {...formik.getFieldProps("type")} className={inputClass}>
+                <option value="">Select type</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+              {formik.touched.type && formik.errors.type && (
+                <p className="text-red-400 text-xs mt-1">{formik.errors.type}</p>
+              )}
+            </div>
+
+            <div>
+              <label className={labelClass}>
+                <FaTag className="inline mr-1.5 text-[#e8dcc8]" />
+                Name
+              </label>
+              <input
+                type="text"
+                {...formik.getFieldProps("name")}
+                placeholder="Category name"
+                className={inputClass}
+              />
+              {formik.touched.name && formik.errors.name && (
+                <p className="text-red-400 text-xs mt-1">{formik.errors.name}</p>
+              )}
+            </div>
+
+            <div className="flex gap-3 pt-2">
+              <button
+                type="button"
+                onClick={() => navigate("/categories")}
+                className="flex-1 py-3 rounded-xl border border-white/5 text-[#a89f91] hover:text-[#f5f0e8] text-sm font-medium transition"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={isPending}
+                className="flex-1 py-3 bg-[#e8dcc8] hover:bg-[#d4c9b0] text-[#0f1b2d] font-semibold rounded-xl text-sm transition"
+              >
+                {isPending ? "Saving..." : "Save Changes"}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 

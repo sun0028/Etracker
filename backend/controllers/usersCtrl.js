@@ -51,7 +51,7 @@ const usersController = {
     }
     //! Generate a token
     //?changed key token
-    const token = jwt.sign({ id: user._id }, "tracker", {
+    const token = jwt.sign({ id: user._id },  process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
     //!Send the response
