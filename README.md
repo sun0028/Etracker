@@ -18,7 +18,7 @@ Track income and expenses, manage custom categories, and visualise spending patt
 
 ---
 
-## Screenshots
+## Web Interface Showcase
 
 ### Dashboard — Financial Overview
 ![Dashboard](./screenshots/dashboard.png)
@@ -105,6 +105,7 @@ App runs at `http://localhost:5173`
 
 ---
 
+
 ## Project Structure
 Etracker/
 ├── backend/
@@ -124,7 +125,6 @@ Etracker/
 │   │   ├── transactionRouter.js
 │   │   └── userRouter.js
 │   └── app.js
-│
 └── frontend/
 └── src/
 ├── components/
@@ -141,6 +141,8 @@ Etracker/
 │   ├── transactions/transactionService.js
 │   └── users/userService.js
 └── utils/
+
+
 
 ---
 
