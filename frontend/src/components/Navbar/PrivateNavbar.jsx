@@ -25,13 +25,13 @@ export default function PrivateNavbar() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 justify-between items-center">
 
-              {/* Logo */}
+              
               <Link to="/dashboard" className="flex items-center gap-2">
-               {/*  <FaWallet className="text-[#e8dcc8] text-xl" /> */}
+               
                 <span className="text-[#f5f0e8] font-bold text-lg">Expense Tracker</span>
               </Link>
 
-              {/* Desktop nav */}
+              
               <div className="hidden md:flex items-center gap-6">
                 <Link to="/dashboard" className="text-[#a89f91] hover:text-[#f5f0e8] text-sm font-medium transition">
                   Dashboard
@@ -40,7 +40,7 @@ export default function PrivateNavbar() {
                   Categories
                 </Link>
 
-                {/* Profile dropdown */}
+                
                 <Menu as="div" className="relative">
                   <Menu.Button className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-[#e8dcc8] hover:bg-[#e8dcc8]/20 transition">
                     <FaUser className="text-sm" />
@@ -85,7 +85,7 @@ export default function PrivateNavbar() {
                 </Menu>
               </div>
 
-              {/* Mobile button */}
+        
               <div className="md:hidden">
                 <Disclosure.Button className="text-[#a89f91] hover:text-[#f5f0e8]">
                   {open ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
@@ -94,7 +94,7 @@ export default function PrivateNavbar() {
             </div>
           </div>
 
-          {/* Mobile menu */}
+      
           <Disclosure.Panel className="md:hidden border-t border-white/5">
             <div className="px-4 py-3 space-y-2">
               <Link to="/dashboard" className="block py-2 text-[#a89f91] hover:text-[#f5f0e8] text-sm">Dashboard</Link>

@@ -14,7 +14,7 @@ import TrendsChart from "../Transactions/TrendsChart";
 const inputClass = "w-full p-2.5 rounded-xl bg-[#0a1220] border border-white/5 text-[#f5f0e8] text-sm focus:border-[#e8dcc8] focus:outline-none";
 const labelClass = "block text-[#a89f91] text-xs mb-1.5 font-medium";
 
-// ── Add Transaction Modal ─────────────────────────────────────────────────────
+
 const AddTransactionModal = ({ onClose, categories, onCategoryCreated }) => {
   const queryClient = useQueryClient();
 
@@ -108,7 +108,7 @@ const AddTransactionModal = ({ onClose, categories, onCategoryCreated }) => {
             )}
           </div>
 
-          {/* Amount */}
+          
           <div>
             <label className={labelClass}>Amount</label>
             <input
@@ -122,7 +122,7 @@ const AddTransactionModal = ({ onClose, categories, onCategoryCreated }) => {
             )}
           </div>
 
-          {/* Category */}
+          
           <div>
             <label className={labelClass}>Category</label>
             <select
@@ -141,7 +141,7 @@ const AddTransactionModal = ({ onClose, categories, onCategoryCreated }) => {
               <p className="text-red-400 text-xs mt-1">{formik.errors.category}</p>
             )}
 
-            {/* New category inputs */}
+            
             {formik.values.category === "__new__" && (
               <div className="mt-3 p-3 glass-dark rounded-xl border border-white/5 space-y-2">
                 <p className="text-[#a89f91] text-xs mb-2">New category details</p>
@@ -165,7 +165,7 @@ const AddTransactionModal = ({ onClose, categories, onCategoryCreated }) => {
             )}
           </div>
 
-          {/* Date */}
+          
           <div>
             <label className={labelClass}>Date</label>
             <input
@@ -178,7 +178,7 @@ const AddTransactionModal = ({ onClose, categories, onCategoryCreated }) => {
             )}
           </div>
 
-          {/* Description */}
+          
           <div>
             <label className={labelClass}>Description (optional)</label>
             <input
@@ -202,7 +202,7 @@ const AddTransactionModal = ({ onClose, categories, onCategoryCreated }) => {
   );
 };
 
-// ── Add Category Modal ────────────────────────────────────────────────────────
+// Category Modal 
 const AddCategoryModal = ({ onClose }) => {
   const queryClient = useQueryClient();
   const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
@@ -273,7 +273,7 @@ const AddCategoryModal = ({ onClose }) => {
   );
 };
 
-// ── Main Dashboard ────────────────────────────────────────────────────────────
+// Main Dashboard 
 const Dashboard = () => {
   const [showTxModal, setShowTxModal] = useState(false);
   const [showCatModal, setShowCatModal] = useState(false);
@@ -302,7 +302,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen  text-[#f5f0e8] px-6 py-8">
 
-      {/* Modals */}
+  
       {showTxModal && (
         <AddTransactionModal
           onClose={() => setShowTxModal(false)}
@@ -312,7 +312,7 @@ const Dashboard = () => {
       )}
       {showCatModal && <AddCategoryModal onClose={() => setShowCatModal(false)} />}
 
-      {/* Header */}
+  
       <div className="max-w-6xl mx-auto mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-[#f5f0e8]">Dashboard</h1>
@@ -336,7 +336,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Stats Cards */}
+  
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
         <div className="glass rounded-2xl p-6 border border-white/5">
           <div className="flex items-center justify-between mb-4">
@@ -374,7 +374,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Chart + Transactions */}
+  
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1">
           <TransactionChart />

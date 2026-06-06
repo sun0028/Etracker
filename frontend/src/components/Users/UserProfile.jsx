@@ -17,7 +17,7 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state?.auth?.user);
 
-  // Update profile mutation
+
   const {
     mutateAsync: updateProfile,
     isPending: isUpdating,
@@ -29,7 +29,7 @@ const UserProfile = () => {
     mutationKey: ["update-profile"],
   });
 
-  // Change password mutation
+  
   const {
     mutateAsync: changePassword,
     isPending: isChanging,
@@ -69,13 +69,13 @@ const UserProfile = () => {
     <div className="min-h-screen px-6 py-10">
       <div className="max-w-2xl mx-auto space-y-6">
 
-        {/* Header */}
+        
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-[#f5f0e8]">Profile Settings</h1>
           <p className="text-[#a89f91] text-sm mt-1">Manage your account details</p>
         </div>
 
-        {/* Avatar + name card */}
+        
         <div className="glass rounded-2xl p-6 border border-white/5 flex items-center gap-5">
           <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center">
             <FaUserCircle className="text-[#e8dcc8] text-4xl" />
@@ -86,7 +86,7 @@ const UserProfile = () => {
           </div>
         </div>
 
-        {/* Update Profile */}
+    
         <div className="glass rounded-2xl p-6 border border-white/5">
           <div className="flex items-center gap-2 mb-6">
             <FaEnvelope className="text-[#e8dcc8]" />
@@ -134,7 +134,7 @@ const UserProfile = () => {
           </form>
         </div>
 
-        {/* Change Password */}
+        
         <div className="glass rounded-2xl p-6 border border-white/5">
           <div className="flex items-center gap-2 mb-2">
             <FaShieldAlt className="text-[#e8dcc8]" />

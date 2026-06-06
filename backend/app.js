@@ -14,7 +14,7 @@ mongoose
   .then(() => console.log("DB Connected"))
   .catch((e) => console.log(e));
 
-// ✅ Define config once and reuse it everywhere
+
 const corsOptions = {
   origin: [
     "http://localhost:5173",
@@ -25,9 +25,9 @@ const corsOptions = {
   credentials: true,
 };
 
-// ✅ Pass the SAME config to both — critical for preflight to work
+
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // ← was missing corsOptions before
+app.options("*", cors(corsOptions)); 
 
 app.use(express.json());
 app.use("/", userRouter);

@@ -29,7 +29,7 @@ const TrendsChart = () => {
       if (activeTab === "Daily") {
         key = date.toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
       } else if (activeTab === "Weekly") {
-        // Get week number
+        
         const startOfYear = new Date(date.getFullYear(), 0, 1);
         const week = Math.ceil(((date - startOfYear) / 86400000 + startOfYear.getDay() + 1) / 7);
         key = `W${week}`;
@@ -71,7 +71,7 @@ const TrendsChart = () => {
           <p className="text-[#a89f91] text-sm mt-0.5">Track your financial patterns over time</p>
         </div>
 
-        {/* Expense / Income toggle */}
+        
         <div className="flex glass-dark rounded-xl p-1 border border-white/5">
           {["expense", "income"].map((type) => (
             <button
@@ -91,7 +91,7 @@ const TrendsChart = () => {
         </div>
       </div>
 
-      {/* Period tabs */}
+    
       <div className="flex gap-2 mb-6">
         {TABS.map((tab) => (
           <button

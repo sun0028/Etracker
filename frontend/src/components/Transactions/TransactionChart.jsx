@@ -18,7 +18,7 @@ const TransactionChart = () => {
     queryKey: ["list-transactions"],
   });
 
-  // Group expenses by category
+  
   const expenseByCategory = {};
   let totalIncome = 0;
 

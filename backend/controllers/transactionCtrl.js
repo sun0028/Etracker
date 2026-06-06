@@ -3,7 +3,7 @@ const Category = require("../model/Category");
 const Transaction = require("../model/Transaction");
 
 const transactionController = {
-  //!add
+ 
   create: asyncHandler(async (req, res) =>  {
   const { type, category, amount, date, description } = req.body;
   if (!amount || !type || !date) {
@@ -14,13 +14,13 @@ const transactionController = {
     type,
     category,
     amount,
-    date,          // ← was missing
+    date,          
     description,
   });
   res.status(201).json(transaction);
 }),
 
-  //!lists
+  
   getFilteredTransactions: asyncHandler(async (req, res) => {
     const { startDate, endDate, type, category } = req.query;
     let filters = { user: req.user };
@@ -36,9 +36,9 @@ const transactionController = {
     }
     if (category) {
       if (category === "All") {
-        //!  No category filter needed when filtering for 'All'
+        
       } else if (category === "Uncategorized") {
-        //! Filter for transactions that are specifically categorized as 'Uncategorized'
+        
         filters.category = "Uncategorized";
       } else {
         filters.category = category;
@@ -48,9 +48,9 @@ const transactionController = {
     res.json(transactions);
   }),
 
-  // !update
+
   update: asyncHandler(async (req, res) => {
-    //! Find the transaction
+
     const transaction = await Transaction.findById(req.params.id);
     if (transaction && transaction.user.toString() === req.user.toString()) {
       (transaction.type = req.body.type || transaction.type),
@@ -59,14 +59,14 @@ const transactionController = {
         (transaction.date = req.body.date || transaction.date),
         (transaction.description =
           req.body.description || transaction.description);
-      //update
+      
       const updatedTransaction = await transaction.save();
       res.json(updatedTransaction);
     }
   }),
-  //! delete
+
   delete: asyncHandler(async (req, res) => {
-    //! Find the transaction
+  
     const transaction = await Transaction.findById(req.params.id);
     if (transaction && transaction.user.toString() === req.user.toString()) {
       await Transaction.findByIdAndDelete(req.params.id);

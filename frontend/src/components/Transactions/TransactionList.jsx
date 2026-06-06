@@ -48,7 +48,7 @@ const TransactionList = () => {
         <span className="text-[#a89f91] text-sm">{transactions?.length || 0} records</span>
       </div>
 
-      {/* Filters */}
+      
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
         <input type="date" name="startDate" value={filters.startDate} onChange={handleFilterChange} className={inputClass} />
         <input type="date" name="endDate" value={filters.endDate} onChange={handleFilterChange} className={inputClass} />
@@ -72,7 +72,7 @@ const TransactionList = () => {
         </div>
       </div>
 
-      {/* List */}
+      
       {isLoading ? (
         <p className="text-center text-[#a89f91] py-8">Loading...</p>
       ) : transactions?.length === 0 ? (

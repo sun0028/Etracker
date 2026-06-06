@@ -26,10 +26,10 @@ const validationSchema = Yup.object({
 });
 
 const TransactionForm = () => {
-  //Navigate
+  
   const navigate = useNavigate();
 
-  // Mutation
+
   const {
     mutateAsync,
     isPending,
@@ -40,7 +40,7 @@ const TransactionForm = () => {
     mutationFn: addTransactionAPI,
     mutationKey: ["add-transaction"],
   });
-  //fetching
+  
   const { data, isError, isLoading, isFetched, error, refetch } = useQuery({
     queryFn: listCategoriesAPI,
     queryKey: ["list-categories"],
@@ -75,7 +75,7 @@ const TransactionForm = () => {
         </h2>
         <p className="text-gray-600">Fill in the details below.</p>
       </div>
-      {/* Display alert message */}
+      
 
       {isError && (
         <AlertMessage
@@ -89,7 +89,7 @@ const TransactionForm = () => {
       {isSuccess && (
         <AlertMessage type="success" message="Transaction added successfully" />
       )}
-      {/* Transaction Type Field */}
+      
       <div className="space-y-2">
         <label
           htmlFor="type"
@@ -112,7 +112,7 @@ const TransactionForm = () => {
         )}
       </div>
 
-      {/* Amount Field */}
+      
       <div className="flex flex-col space-y-1">
         <label htmlFor="amount" className="text-gray-700 font-medium">
           <FaDollarSign className="inline mr-2 text-cyan-600" />
@@ -130,7 +130,7 @@ const TransactionForm = () => {
         )}
       </div>
 
-      {/* Category Field */}
+      
       <div className="flex flex-col space-y-1">
         <label htmlFor="category" className="text-gray-700 font-medium">
           <FaRegCommentDots className="inline mr-2 text-cyan-600" />
@@ -157,7 +157,7 @@ const TransactionForm = () => {
         )}
       </div>
 
-      {/* Date Field */}
+      
       <div className="flex flex-col space-y-1">
         <label htmlFor="date" className="text-gray-700 font-medium">
           <FaCalendarAlt className="inline mr-2 text-cyan-600" />
@@ -174,7 +174,7 @@ const TransactionForm = () => {
         )}
       </div>
 
-      {/* Description Field */}
+
       <div className="flex flex-col space-y-1">
         <label htmlFor="description" className="text-gray-700 font-medium">
           <FaRegCommentDots className="inline mr-2 text-cyan-600" />
@@ -194,7 +194,7 @@ const TransactionForm = () => {
         )}
       </div>
 
-      {/* Submit Button */}
+      
       <button
         type="submit"
         className="mt-4 bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-200"

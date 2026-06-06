@@ -5,7 +5,7 @@ import { FaMoneyBillWave, FaFilter, FaChartPie, FaShieldAlt, FaTags, FaRegCalend
 const HomePage = () => {
   return (
     <div className="glass-dark text-[#f5f0e8]">
-      {/* Hero */}
+    
       <section className="py-24 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <span className="inline-block bg-[#e8dcc8]/20 text-[#e8dcc8] text-xs font-semibold px-3 py-1 rounded-full mb-4 tracking-widest uppercase">
@@ -26,7 +26,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Features */}
+    
       <section className="py-20 px-6 bg-[#0a1220]">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-[#f5f0e8] mb-2">Everything You Need</h2>
@@ -50,7 +50,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* How It Works */}
+    
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-[#f5f0e8] mb-12">How It Works</h2>

@@ -14,9 +14,9 @@ const validationSchema = Yup.object({
 });
 
 const UpdatePassword = () => {
-  //Dispatch
+  
   const dispatch = useDispatch();
-  // Mutation
+  
   const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
     mutationFn: changePasswordAPI,
     mutationKey: ["change-password"],
@@ -25,15 +25,15 @@ const UpdatePassword = () => {
     initialValues: {
       password: "",
     },
-    // Validations
+    
     validationSchema,
-    //Submit
+    
     onSubmit: (values) => {
       mutateAsync(values.password)
         .then((data) => {
-          //Logout
+          
           dispatch(logoutAction());
-          //remove the user from storage
+          
           localStorage.removeItem("userInfo");
         })
         .catch((e) => console.log(e));

@@ -11,7 +11,7 @@ export default function PublicNavbar() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 justify-between items-center">
               <Link to="/" className="flex items-center gap-2">
-              {/*  <FaWallet className="text-[#e8dcc8] text-xl" /> */}
+              
                 <span className="text-[#f5f0e8] font-bold text-lg">Expense Tracker</span>
               </Link>
 
