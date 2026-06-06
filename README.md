@@ -107,6 +107,8 @@ App runs at `http://localhost:5173`
 
 
 ## Project Structure
+
+```
 Etracker/
 ├── backend/
 │   ├── controllers/
@@ -126,21 +128,22 @@ Etracker/
 │   │   └── userRouter.js
 │   └── app.js
 └── frontend/
-└── src/
-├── components/
-│   ├── Auth/
-│   ├── Category/
-│   ├── Home/
-│   ├── Navbar/
-│   ├── Transactions/
-│   └── Users/
-├── redux/
-│   └── slice/authSlice.js
-├── services/
-│   ├── category/categoryService.js
-│   ├── transactions/transactionService.js
-│   └── users/userService.js
-└── utils/
+    └── src/
+        ├── components/
+        │   ├── Auth/
+        │   ├── Category/
+        │   ├── Home/
+        │   ├── Navbar/
+        │   ├── Transactions/
+        │   └── Users/
+        ├── redux/
+        │   └── slice/authSlice.js
+        ├── services/
+        │   ├── category/categoryService.js
+        │   ├── transactions/transactionService.js
+        │   └── users/userService.js
+        └── utils/
+```
 
 
 
