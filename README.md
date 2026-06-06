@@ -1,10 +1,10 @@
 <div align="center">
 
-# 💰 Expense Tracker
+# Expense Tracker
 
-### A full-stack personal finance management app built with the MERN stack
+### A full-stack personal finance management application built with the MERN stack
 
-Track income and expenses, manage custom categories, and visualise spending patterns through interactive charts and trend analysis — all wrapped in a sleek dark glassmorphism UI.
+Track income and expenses, manage custom categories, and visualise spending patterns through interactive charts and trend analysis — built with a dark glassmorphism UI.
 
 [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://mongodb.com)
 [![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com)
@@ -12,11 +12,13 @@ Track income and expenses, manage custom categories, and visualise spending patt
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 
+**[Live Demo](https://etracker-lemon.vercel.app)**
+
 </div>
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ### Dashboard — Financial Overview
 ![Dashboard](./screenshots/dashboard.png)
@@ -29,24 +31,24 @@ Track income and expenses, manage custom categories, and visualise spending patt
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔐 **JWT Authentication** — Secure login and registration with token-based auth, password hashing with bcryptjs
-- 💸 **Income & Expense Tracking** — Log transactions with amount, date, category, and description
-- 🏷️ **Custom Categories** — Create, edit, and delete your own income/expense categories inline
-- 🔍 **Smart Filtering** — Filter transactions by date range, type, and category
-- 🍩 **Interactive Doughnut Chart** — Visual breakdown of income vs expenses per category with unique colors per expense
-- 📈 **Spending Trends** — Area chart showing daily, weekly, and monthly financial patterns with income/expense toggle
-- 👤 **Profile Management** — Update username, email, and change password
-- 🎨 **Glassmorphism UI** — Dark navy theme with frosted glass card design
+- **JWT Authentication** — Secure login and registration with token-based auth and bcryptjs password hashing
+- **Income & Expense Tracking** — Log transactions with amount, date, category, and description
+- **Custom Categories** — Create, edit, and delete income/expense categories inline
+- **Smart Filtering** — Filter transactions by date range, type, and category
+- **Interactive Doughnut Chart** — Visual breakdown of income vs expenses per category
+- **Spending Trends** — Area chart showing daily, weekly, and monthly patterns with income/expense toggle
+- **Profile Management** — Update username, email, and password
+- **Glassmorphism UI** — Dark navy theme with frosted glass card design
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Layer | Technologies |
-|-------|-------------|
-| **Frontend** | React.js, Vite, Redux Toolkit, TanStack Query, Tailwind CSS |
+|---|---|
+| **Frontend** | React, Vite, Redux Toolkit, TanStack Query, Tailwind CSS |
 | **Charts** | Chart.js, Recharts |
 | **Forms** | Formik, Yup |
 | **Backend** | Node.js, Express.js |
@@ -56,48 +58,54 @@ Track income and expenses, manage custom categories, and visualise spending patt
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
+
 - Node.js v18+
 - MongoDB Atlas account
 
 ### 1. Clone the repository
+
 ```bash
 git clone https://github.com/sun0028/Etracker.git
 cd Etracker
 ```
 
 ### 2. Backend setup
+
 ```bash
 cd backend
 npm install
 ```
 
 Create a `.env` file inside `backend/`:
+
 ```env
 MONGO_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/etracker
 JWT_SECRET=your_secret_key_here
 PORT=8000
 ```
 
-Run the backend:
+Start the backend:
+
 ```bash
 npm run dev
 ```
 
 ### 3. Frontend setup
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-App runs at **http://localhost:5173**
+App runs at `http://localhost:5173`
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 Etracker/
 ├── backend/
 │   ├── controllers/
@@ -136,66 +144,70 @@ Etracker/
 
 ---
 
-## 🔌 API Reference
+## API Reference
 
 ### Auth Routes
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| POST | `/users/register` | ❌ | Register new user |
-| POST | `/users/login` | ❌ | Login, returns JWT |
-| GET | `/users/profile` | ✅ | Get user profile |
-| PUT | `/users/update-profile` | ✅ | Update username/email |
-| PUT | `/users/change-passwords` | ✅ | Change password |
+
+| Method | Endpoint | Auth Required | Description |
+|---|---|---|---|
+| POST | `/api/v1/users/register` | No | Register new user |
+| POST | `/api/v1/users/login` | No | Login, returns JWT |
+| GET | `/api/v1/users/profile` | Yes | Get user profile |
+| PUT | `/api/v1/users/update-profile` | Yes | Update username/email |
+| PUT | `/api/v1/users/change-passwords` | Yes | Change password |
 
 ### Category Routes
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| POST | `/categories/create` | ✅ | Create category |
-| GET | `/categories/lists` | ✅ | List all categories |
-| PUT | `/categories/update/:id` | ✅ | Update category |
-| DELETE | `/categories/delete/:id` | ✅ | Delete category |
+
+| Method | Endpoint | Auth Required | Description |
+|---|---|---|---|
+| POST | `/api/v1/categories/create` | Yes | Create category |
+| GET | `/api/v1/categories/lists` | Yes | List all categories |
+| PUT | `/api/v1/categories/update/:id` | Yes | Update category |
+| DELETE | `/api/v1/categories/delete/:id` | Yes | Delete category |
 
 ### Transaction Routes
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| POST | `/transactions/create` | ✅ | Add transaction |
-| GET | `/transactions/lists` | ✅ | Get filtered transactions |
-| PUT | `/transactions/update/:id` | ✅ | Update transaction |
-| DELETE | `/transactions/delete/:id` | ✅ | Delete transaction |
+
+| Method | Endpoint | Auth Required | Description |
+|---|---|---|---|
+| POST | `/api/v1/transactions/create` | Yes | Add transaction |
+| GET | `/api/v1/transactions/lists` | Yes | Get filtered transactions |
+| PUT | `/api/v1/transactions/update/:id` | Yes | Update transaction |
+| DELETE | `/api/v1/transactions/delete/:id` | Yes | Delete transaction |
 
 ---
 
-## 🌐 Deployment
+## Deployment
 
-### Backend → [Render](https://render.com) (Free)
-1. New Web Service → connect GitHub repo
-2. Root directory: `backend`
+### Backend — [Render](https://render.com)
+
+1. Create a new Web Service and connect your GitHub repository
+2. Set root directory to `backend`
 3. Build command: `npm install`
 4. Start command: `node app.js`
-5. Add env vars: `MONGO_URL`, `JWT_SECRET`, `PORT`
+5. Add environment variables: `MONGO_URL`, `JWT_SECRET`, `PORT`
 
-### Frontend → [Vercel](https://vercel.com) (Free)
-1. Import GitHub repo
-2. Root directory: `frontend`
-3. Add env var: `VITE_API_URL=https://your-backend.onrender.com`
+### Frontend — [Vercel](https://vercel.com)
+
+1. Import your GitHub repository
+2. Set root directory to `frontend`
+3. Add environment variable: `VITE_API_URL=https://your-backend.onrender.com/api/v1`
 4. Deploy
 
 ---
 
-## ⚠️ Environment Variables
+## Environment Variables
 
 | Variable | Location | Description |
-|----------|----------|-------------|
-| `MONGO_URL` | backend/.env | MongoDB Atlas connection string |
-| `JWT_SECRET` | backend/.env | Secret key for JWT signing |
-| `PORT` | backend/.env | Server port (default 8000) |
-| `VITE_API_URL` | frontend/.env | Backend API base URL |
+|---|---|---|
+| `MONGO_URL` | `backend/.env` | MongoDB Atlas connection string |
+| `JWT_SECRET` | `backend/.env` | Secret key for JWT signing |
+| `PORT` | `backend/.env` | Server port (default: 8000) |
+| `VITE_API_URL` | `frontend/.env` | Backend API base URL (include `/api/v1`) |
 
 ---
 
-## 👩‍💻 Author
+## Author
 
 **Sonali Saini**
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sun0028)
-
